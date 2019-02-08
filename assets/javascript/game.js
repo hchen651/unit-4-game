@@ -2,8 +2,12 @@ var targetNumber = Math.floor((Math.random() * 101) + 19);
 
 $("#number-to-guess").text(targetNumber);
 $("#current-total").text("0");
+$("#win-counter").text("0");
+$("#loss-counter").text("0");
 
 var counter = 0;
+var wins = 0;
+var losses = 0;
 
 for (var i = 0; i < 4; i++) {
     var numberOptions = Math.floor((Math.random() * 12)+1);
@@ -23,15 +27,26 @@ $(".crystal-image").on("click", function () {
     $("#current-total").text(counter);
 
     if (counter === targetNumber) {
-        alert("You win!");
+        alert("You win! A new game will start upon clicking OK.");
+        wins++;
+        $("#win-counter").text(wins);
         newGame();
     }
 
     else if (counter >= targetNumber) {
-        alert("You lose!!");
+        alert("You lose! Your final total was " + counter + ". A new game will start upon hitting OK.");
+        losses++;
+        $("#loss-counter").text(losses);
         newGame();
     }
+});
 
+$(document).ready(function() {
+    $(".new-game-button").click(function(){
+        losses++;
+        $("#loss-counter").text(losses);
+        newGame();
+    }); 
 });
 
 function newGame() {
