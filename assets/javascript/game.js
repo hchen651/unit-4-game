@@ -13,17 +13,13 @@ for (var i = 0; i < 4; i++) {
     imageCrystal.attr("src", "assets/images/c" + i + ".png");
     imageCrystal.attr("data-crystalvalue", numberOptions);
     imageCrystal.attr("style", "padding: 10px;");
-    console.log(numberOptions);
     $("#crystals").append(imageCrystal);
 }
 
 $(".crystal-image").on("click", function () {
     var crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
-
     counter += crystalValue;
-    console.log(crystalValue);
-
     $("#current-total").text(counter);
 
     if (counter === targetNumber) {
@@ -39,13 +35,14 @@ $(".crystal-image").on("click", function () {
 });
 
 function newGame() {
+    targetNumber = Math.floor((Math.random() * 101)+19);
+    counter = 0;
+    $("#number-to-guess").text(targetNumber);
+    $("#current-total").text(counter);
     for (var i = 0; i < 4; i++) {
         var numberOptions = Math.floor((Math.random() * 12)+1);
         var imageCrystal = $(".crystal-image-"+i);
-        imageCrystal.attr("data-crystalvalue", numberOptions);
-    
-        console.log(numberOptions);
-    
+        imageCrystal.attr("data-crystalvalue", numberOptions);    
         $("#crystals").append(imageCrystal);
     }
-  }
+}
